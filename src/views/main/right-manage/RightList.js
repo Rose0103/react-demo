@@ -15,7 +15,7 @@ export default function RightList() {
 
     useEffect(() => {
       // 获取所有权限列表
-      axios.get("http://localhost:3000/rights?_embed=children").then(res => {
+      axios.get("/rights?_embed=children").then(res => {
         const list = res.data
         list.forEach(item => {
           if(item?.children.length === 0) {
@@ -68,9 +68,9 @@ export default function RightList() {
     setDataSource([...dataSource])
 
     if (row.grade === 1) {
-      axios.patch(`http://localhost:3000/rights/${row.id}`,{pagepermisson:row.pagepermisson})
+      axios.patch(`/rights/${row.id}`,{pagepermisson:row.pagepermisson})
     }else {
-      axios.patch(`http://localhost:3000/children/${row.id}`,{pagepermisson:row.pagepermisson})
+      axios.patch(`/children/${row.id}`,{pagepermisson:row.pagepermisson})
     }
   };
 
@@ -94,7 +94,7 @@ export default function RightList() {
   const deleteMethed = (row) => {
     console.log(row);
     // setDataSource(dataSource.filter(data=> data.id !== row.id))
-    // axios.delete(`http://localhost:3000/rights/${row.id}`)
+    // axios.delete(`/rights/${row.id}`)
   }
 
   return (

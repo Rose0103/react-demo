@@ -53,6 +53,15 @@
       "region": "亚洲",
       "roleId": 3,
       "id": 8
+    },
+    {
+      "username": "test",
+      "password": "123456",
+      "region": "",
+      "roleId": 1,
+      "roleState": true,
+      "default": false,
+      "id": 9
     }
   ],
   "roles": [
@@ -81,7 +90,8 @@
         "/audit-manage",
         "/audit-manage/audit",
         "/audit-manage/list",
-        "/user-manage/delete"
+        "/user-manage/delete",
+        "/home"
       ]
     },
     {

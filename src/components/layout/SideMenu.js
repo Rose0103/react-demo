@@ -91,7 +91,7 @@ export default  function SideMenu() {
 
   // 请求左侧数据
   useEffect(() => {
-    axios.get("http://localhost:3000/rights?_embed=children").then(res => {
+    axios.get("/rights?_embed=children").then(res => {
       console.log(res.data);
       setMenu(res.data)
     })
@@ -99,15 +99,14 @@ export default  function SideMenu() {
 
   useEffect(()=> {
     let path = location.pathname==="/"?"/home":location.pathname;
-      console.log(path,"path");
       setDefaultKey(path);
       const key = '/'+ path.split('/')[1]
-      console.log(key);
       setOpenKey([key])
   }, [location.pathname])
 
+  const { role:{rights}} = JSON.parse(localStorage.getItem('token'))
   const checkPagePermisson = (item) => {
-    return item.pagepermisson === 1
+    return item.pagepermisson && rights.includes(item.key)
   }
 
   // 渲染左侧栏

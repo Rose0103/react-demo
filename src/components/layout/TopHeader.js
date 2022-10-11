@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 import {
   MenuFoldOutlined,
@@ -7,22 +8,24 @@ import {
   DownOutlined,
 } from '@ant-design/icons';
 
-import { Layout,Dropdown,Space,Menu,message,Avatar  } from 'antd';
+import { Layout,Dropdown,Space,Menu,Avatar  } from 'antd';
 const {  Header } = Layout;
 
 export default function TopHeader() {
 
   // 状态
   const [collapsed, setCollapsed] = useState(false)
+  const navigate = useNavigate();
 
-  const onClick = ({ key }) => {
-    message.info(`Click on item ${key}`);
-  };
+  const { role:{roleName},username} = JSON.parse(localStorage.getItem('token'))
 
   const menu = (
-    <Menu onClick={onClick}>
-      <Menu.Item key="1">个人信息</Menu.Item>
-      <Menu.Item key="2" danger>退出</Menu.Item>
+    <Menu >
+      <Menu.Item>{roleName}</Menu.Item>
+      <Menu.Item danger onClick={()=> {
+        localStorage.removeItem('token')
+        navigate('/login',{replace: true})
+      }}>退出</Menu.Item>
     </Menu>
   );
   
@@ -34,7 +37,7 @@ export default function TopHeader() {
         onClick: () => setCollapsed(!collapsed),
       })}
       <div style={{float: 'right'}}>
-        <span style={{marginRight: '20px'}}>欢迎admin回来</span>
+        <span style={{marginRight: '20px'}}>欢迎<span style={{color:'#1890ff'}}>{username}</span>回来</span>
         <Dropdown overlay={menu}>
           <a onClick={e => e.preventDefault()}>
             <Space>

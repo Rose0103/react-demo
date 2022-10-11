@@ -16,14 +16,14 @@ export default function RoleList() {
 
   useEffect(()=> {
     // 获取所有角色列表
-    axios.get('http://localhost:3000/roles').then(res=> {
+    axios.get('/roles').then(res=> {
       setDataSource(res.data)
     })
   },[])
 
   useEffect(() => {
     // 获取所有权限列表
-    axios.get("http://localhost:3000/rights?_embed=children").then(res => {
+    axios.get("/rights?_embed=children").then(res => {
       const list = res.data
       list.forEach(item => {
         if(item?.children.length === 0) {
@@ -75,7 +75,7 @@ export default function RoleList() {
     }))
 
     //删除接口
-    axios.patch(`http://localhost:3000/roles/${currentId}`,{rights:currentRigths})
+    axios.patch(`/roles/${currentId}`,{rights:currentRigths})
   };
 
   const onCheck = (checkedKeys, info) => {
@@ -104,7 +104,7 @@ export default function RoleList() {
   const deleteMethed = (row) => {
     console.log(row);
     // setDataSource(dataSource.filter(item=>item.id !== row.id))
-    // axios.delete(`http://localhost:3000/roles/${row.id}`)
+    // axios.delete(`/roles/${row.id}`)
   }
   
 

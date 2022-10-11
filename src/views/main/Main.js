@@ -1,19 +1,22 @@
-import React from 'react'
+import React,{ useEffect } from 'react'
 import TopHeader from '../../components/layout/TopHeader';
 import SideMenu from '../../components/layout/SideMenu';
-import { Routes,Route,Navigate } from 'react-router-dom';
-import Home from './home/Home';
-import UserList from './user-manage/UserList';
-import RoleList from './right-manage/RoleList';
-import RightList from './right-manage/RightList';
-import NoPermisson from './nopermisson/NoPermisson';
 
 import './main.css'
 
 import { Layout } from 'antd';
+import NewsRouter from '../../components/layout/NewsRouter';
+import 'nprogress/nprogress.css'
+import nProgress from 'nprogress';
 const { Content } = Layout;
 
 export default function Main() {
+
+  nProgress.start()
+  useEffect(() => {
+    nProgress.done()
+  })
+
   return (
     <Layout>
       <SideMenu></SideMenu>
@@ -29,16 +32,7 @@ export default function Main() {
               overflow:"auto"
             }}
           >
-            <Routes>
-              <Route path='/home' element={<Home/>}></Route>
-              <Route path='/user-manage/list' element={<UserList/>} ></Route>
-              <Route path='/right-manage/role/list' element={<RoleList/>}></Route>
-              <Route path='/right-manage/right/list' element={<RightList/>}></Route>
-
-              {/* 重定向 */}
-              <Route path="/" element={<Navigate to="/home" replace={true}/>} />
-              <Route path='*' element={<NoPermisson />}/>
-            </Routes>
+           <NewsRouter></NewsRouter>
           </Content>
 
       </Layout>
