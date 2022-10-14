@@ -4,7 +4,8 @@ import Home from "../../views/main/home/Home";
 import NewsAdd from "../../views/main/news-manage/NewsAdd";
 import NewsDraft from "../../views/main/news-manage/NewsDraft";
 import NewsCategory from "../../views/main/news-manage/NewsCategory";
-
+import NewsPreview from "../../views/main/news-manage/NewsPreview";
+// import NewsUpdate from "../../views/main/news-manage/NewsUpdate";
 import NoPermisson from "../../views/main/nopermisson/NoPermisson";
 import RightList from "../../views/main/right-manage/RightList";
 import RoleList from "../../views/main/right-manage/RoleList";
@@ -26,6 +27,8 @@ const LocalRouterMap = {
     '/news-manage/add':<NewsAdd/>,
     '/news-manage/draft':<NewsDraft/>,
     '/news-manage/category':<NewsCategory/>,
+    '/news-manage/preview/:id':<NewsPreview/>,
+    '/news-manage/update/:id':<NewsAdd/>,
     '/audit-manage/audit':<Audit/>,
     '/audit-manage/list':<AuditList/>,
     '/publish-manage/unpublished':<Unpublished/>,
@@ -52,7 +55,7 @@ export default function NewsRouter() {
     const {role:{rights}} = JSON.parse(localStorage.getItem('token'))
     const checkRoute =(item) => {
         //判断权限列表中的配置项有没有 
-        return LocalRouterMap[item.key]  && item.pagepermisson
+        return LocalRouterMap[item.key]  && (item.pagepermisson || item.routepermisson)  
     }
 
     const checkUserPermission = (item) => {
