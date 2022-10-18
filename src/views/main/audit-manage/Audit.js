@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Button, Divider, Table } from "antd";
+import { Button, Divider, notification, Table } from "antd";
 export default function Audit() {
     const [dataSource,setDataSource] = useState([])
 
@@ -18,11 +18,24 @@ export default function Audit() {
         axios.get("/news?&auditState=1&_expand=category").then(res => {
           const list = res.data
           setDataSource((roleObj[roleId]==='superadmin')?list:[
-            ...list.filter(item=>item.username === username), //展示他自己
+            ...list.filter(item=>item.author === username), //展示他自己
             ...list.filter(item=>item.region === region && roleObj[item.roleId]==='editor')
           ])
         })
     },[roleId,region,username])
+
+    const handleAudit = (row,auditState,publishState) => {
+        console.log(row);
+        setDataSource(dataSource.filter(item=>item.id!==row.id))
+        axios.patch(`/news/${row.id}`,{
+            auditState,publishState
+        }).then(res => {
+            notification.info({
+                message: `通知 `,
+                description:`您可以到 【审核管理/审核列表】 中查看您的新闻`,placement:'bottomRight'
+              });
+        })
+    }
     
     const columns = [
         
@@ -53,9 +66,9 @@ export default function Audit() {
           key: '操作',
           render: (row) => (
              <div>
-               <Button type="primary">通过</Button>
+               <Button type="primary" onClick={()=> handleAudit(row,2,1)}>通过</Button>
                <Divider type="vertical" />
-               <Button danger>驳回</Button>
+               <Button danger  onClick={()=> handleAudit(row,3,0)}>驳回</Button>
              </div>
           ),
         }

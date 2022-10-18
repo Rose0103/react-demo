@@ -488,8 +488,8 @@
       "region": "亚洲",
       "author": "铁锤",
       "roleId": 2,
-      "auditState": 1,
-      "publishState": 0,
+      "auditState": 2,
+      "publishState": 1,
       "createTime": 1665641208237,
       "star": 0,
       "view": 0,
@@ -516,8 +516,8 @@
       "region": "亚洲",
       "author": "铁锤",
       "roleId": 2,
-      "auditState": 1,
-      "publishState": 0,
+      "auditState": 2,
+      "publishState": 1,
       "createTime": 1665644696342,
       "star": 0,
       "view": 0,
@@ -536,6 +536,34 @@
       "star": 0,
       "view": 0,
       "id": 10
+    },
+    {
+      "title": "test新闻",
+      "categoryId": 1,
+      "content": "<p>三国杀</p>\n",
+      "region": "全球",
+      "author": "test",
+      "roleId": 1,
+      "auditState": 0,
+      "publishState": 0,
+      "createTime": 1665755408690,
+      "star": 0,
+      "view": 0,
+      "id": 11
+    },
+    {
+      "title": "test呃呃呃",
+      "categoryId": 3,
+      "content": "<p>虽然是</p>\n",
+      "region": "全球",
+      "author": "test",
+      "roleId": 1,
+      "auditState": 3,
+      "publishState": 0,
+      "createTime": 1665755430905,
+      "star": 0,
+      "view": 0,
+      "id": 12
     }
   ]
 }
